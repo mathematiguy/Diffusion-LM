@@ -15,7 +15,10 @@ push:
 
 build: ${IMAGE}
 ${IMAGE}:
-	sudo singularity build ${IMAGE} ${SINGULARITY_ARGS} Singularity.recipe
+	sudo singularity build ${IMAGE} ${SINGULARITY_ARGS} Singularity
 
 shell:
 	singularity shell ${IMAGE} ${SINGULARITY_ARGS}
+
+root-shell:
+	sudo singularity shell ${IMAGE} ${SINGULARITY_ARGS}

@@ -1,3 +1,13 @@
-ipython
-jupyter
-jupyterlab
+-e git+ssh://git@github.com/mathematiguy/Diffusion-LM.git@c20becb296488254674991b75bf0eea35b21cad8#egg=improved_diffusion&subdirectory=improved-diffusion
+-e git+ssh://git@github.com/mathematiguy/Diffusion-LM.git@c20becb296488254674991b75bf0eea35b21cad8#egg=transformers&subdirectory=transformers
+datasets==2.36.0
+dvc[ssh]==2.36.0
+huggingface_hub==0.11.1
+ipython==8.7.0
+jupyter==1.0.0
+jupyterlab==3.5.0
+spacy==3.2.4
+torch==1.13.0
+torchaudio==0.13.0
+torchvision==0.14.0
+wandb==0.13.5

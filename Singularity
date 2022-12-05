@@ -2,7 +2,7 @@
 # Reference of the kind of base you want to use (e.g., docker, debootstrap, shub).
 Bootstrap: docker
 # Select the docker image you want to use (Here we choose tensorflow)
-From: ubuntu:20.04
+From: nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
 
 # Environment variables that should be sourced at runtime.
 %environment
@@ -13,7 +13,8 @@ From: ubuntu:20.04
 # Add files at build time
 %files
         requirements.txt
-        pkg
+        improved-diffusion
+        transformers
         setup.py
 
 ################# Section: Defining the system #################################
@@ -38,14 +39,14 @@ From: ubuntu:20.04
         update-alternatives --install /usr/local/bin/pip pip /usr/local/bin/pip3.9 1
         update-alternatives --install /usr/local/bin/pip3 pip3 /usr/local/bin/pip3.9 1
 
-        echo "Installing requirements.."
-        pip3 install --upgrade pip
-        pip3 install -r requirements.txt
+        # echo "Installing requirements.."
+        # pip3 install --upgrade pip
+        # pip3 install -r requirements.txt
 
-        echo "Install local package.."
-        python -m pip install -e .
+        # echo "Install local package.."
+        # python -m pip install -e .
 
-        echo "Creating mount points.."
-        mkdir /dataset
-        mkdir /tmp_log
-        mkdir /final_log
+        # echo "Creating mount points.."
+        # mkdir /dataset
+        # mkdir /tmp_log
+        # mkdir /final_log
