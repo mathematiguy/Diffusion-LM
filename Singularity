@@ -25,7 +25,7 @@ From: nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
         
         echo "Installing Tools with apt-get"
         apt-get update
-        apt-get install -y curl wget unzip software-properties-common git
+        apt-get install -y curl wget unzip software-properties-common git mpich openmpi-bin
         apt-get clean
 
         echo "Install python3.9.."
