@@ -15,7 +15,6 @@ From: nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
         requirements.txt
         improved-diffusion
         transformers
-        setup.py
 
 ################# Section: Defining the system #################################
 # Commands in the %post section are executed within the container.
@@ -42,9 +41,6 @@ From: nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
         # echo "Installing requirements.."
         # pip3 install --upgrade pip
         # pip3 install -r requirements.txt
-
-        # echo "Install local package.."
-        # python -m pip install -e .
 
         # echo "Creating mount points.."
         # mkdir /dataset
