@@ -1,7 +1,7 @@
 REPO_NAME := $(shell basename `git rev-parse --show-toplevel` | tr '[:upper:]' '[:lower:]')
 DOCKER_REGISTRY := mathematiguy
 IMAGE := ${REPO_NAME}.sif
-RUN ?= singularity exec ${IMAGE}
+RUN ?= singularity exec --nv ${IMAGE}
 SINGULARITY_ARGS ?=
 
 .PHONY: build shell docker docker-push docker-pull enter enter-root

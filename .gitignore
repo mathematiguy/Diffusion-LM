@@ -1,3 +1,6 @@
 /diffusion-lm.sif
 /improved-diffusion/improved_diffusion.egg-info/
 **/.#*
+**/__pycache__
+/improved-diffusion/wandb/
+/improved-diffusion/diffusion_models/
