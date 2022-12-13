@@ -1,10 +1,14 @@
 REPO_NAME := $(shell basename `git rev-parse --show-toplevel` | tr '[:upper:]' '[:lower:]')
 DOCKER_REGISTRY := mathematiguy
 IMAGE := ${REPO_NAME}.sif
-RUN ?= singularity exec --nv ${IMAGE}
+RUN ?= singularity exec ${FLAGS} --nv ${IMAGE}
+FLAGS ?= -B $$(pwd):/code --pwd /code
 SINGULARITY_ARGS ?=
 
 .PHONY: build shell docker docker-push docker-pull enter enter-root
+
+train_classifier:
+	${RUN} python train_run.py --experiment e2e-tgt-tree --app "--init_emb diff_e2e-tgt_block_rand16_transformer_lr0.0001_0.0_2000_sqrt_Lsimple_h128_s2_d0.1_sd102_xstart_e2e --e2e_train datasets/e2e_data --n_embd 16 --learned_emb yes " --pretrained_model bert-base-uncased --epoch 6 --bsz 10
 
 train_e2e_data:
 	${RUN} bash -c 'cd improved-diffusion && python scripts/run_train.py --diff_steps 2000 --model_arch transformer --lr 0.0001 --lr_anneal_steps 200000 --seed 102 --noise_schedule sqrt --in_channel 16 --modality e2e-tgt --submit no --padding_mode block --app "--predict_xstart True --training_mode e2e --vocab_size 821 --e2e_train ../datasets/e2e_data " --notes xstart_e2e'
@@ -26,12 +30,14 @@ build: ${IMAGE}
 ${IMAGE}:
 	sudo singularity build ${IMAGE} ${SINGULARITY_ARGS} Singularity
 
-sandbox: ${IMAGE}
-	singularity build --sandbox sandbox ${IMAGE}
-	sudo singularity shell ${FLAGS} --writable sandbox
+${REPO_NAME}_sandbox: ${IMAGE}
+	singularity build --sandbox $@ ${IMAGE}
+
+sandbox: ${REPO_NAME}_sandbox
+	sudo singularity shell ${FLAGS} --writable ${REPO_NAME}_sandbox
 
 shell:
-	singularity shell ${IMAGE} ${SINGULARITY_ARGS}
+	singularity shell ${FLAGS} ${IMAGE} ${SINGULARITY_ARGS}
 
 root-shell:
-	sudo singularity shell ${IMAGE} ${SINGULARITY_ARGS}
+	sudo singularity shell ${FLAGS} ${IMAGE} ${SINGULARITY_ARGS}

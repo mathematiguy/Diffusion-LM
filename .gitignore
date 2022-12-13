@@ -5,3 +5,6 @@
 /improved-diffusion/wandb/
 /improved-diffusion/diffusion_models/
 sandbox/
+classifier_models/
+diffusion-lm_sandbox/
+diffusion_models/

@@ -43,6 +43,9 @@ From: nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
         pip3 install --upgrade pip
         pip3 install -r requirements.txt
 
+        echo "Install nltk data"
+        python3 -c "import benepar;benepar.download('benepar_en3')"
+
         echo "Creating mount points.."
         mkdir /dataset
         mkdir /tmp_log
