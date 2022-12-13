@@ -26,6 +26,10 @@ build: ${IMAGE}
 ${IMAGE}:
 	sudo singularity build ${IMAGE} ${SINGULARITY_ARGS} Singularity
 
+sandbox: ${IMAGE}
+	singularity build --sandbox sandbox ${IMAGE}
+	sudo singularity shell ${FLAGS} --writable sandbox
+
 shell:
 	singularity shell ${IMAGE} ${SINGULARITY_ARGS}
 

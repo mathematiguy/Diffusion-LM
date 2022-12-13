@@ -9,12 +9,13 @@ From: nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
         # use bash as default shell
         SHELL=/bin/bash
         export SHELL
+        export PYTHONPATH=/code:$PYTHONPATH
 
 # Add files at build time
 %files
         requirements.txt
-        improved-diffusion
-        transformers
+        improved-diffusion /code/improved-diffusion
+        transformers /code/transformers
 
 ################# Section: Defining the system #################################
 # Commands in the %post section are executed within the container.
@@ -38,11 +39,11 @@ From: nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
         update-alternatives --install /usr/local/bin/pip pip /usr/local/bin/pip3.9 1
         update-alternatives --install /usr/local/bin/pip3 pip3 /usr/local/bin/pip3.9 1
 
-        # echo "Installing requirements.."
-        # pip3 install --upgrade pip
-        # pip3 install -r requirements.txt
+        echo "Installing requirements.."
+        pip3 install --upgrade pip
+        pip3 install -r requirements.txt
 
-        # echo "Creating mount points.."
-        # mkdir /dataset
-        # mkdir /tmp_log
-        # mkdir /final_log
+        echo "Creating mount points.."
+        mkdir /dataset
+        mkdir /tmp_log
+        mkdir /final_log
