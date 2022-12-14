@@ -18,3 +18,4 @@ spacy_stanza==1.0.2
 benepar==0.2.0
 nltk==3.8
 protobuf==3.19.6
+scikit-learn==1.2.0
